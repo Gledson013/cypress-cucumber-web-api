@@ -8,3 +8,11 @@ Cypress.on('uncaught:exception', (err) => {
     console.error('Erro não tratado:', err);
     return false;
 });
+
+beforeEach(() => {
+    // Intercepta e bloqueia requisições que contenham palavras-chave relacionadas a anúncios
+    cy.intercept('GET', '*googleads*', { statusCode: 204 }); // Bloqueia anúncios do Google
+    cy.intercept('GET', '*ads*', { statusCode: 204 }); // Bloqueia URLs com 'ads'
+    cy.intercept('GET', '*doubleclick.net*', { statusCode: 204 }); // Bloqueia DoubleClick
+});
+
