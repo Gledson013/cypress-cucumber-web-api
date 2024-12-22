@@ -76,4 +76,10 @@ module.exports = defineConfig({
     chromeWebSecurity: false, // Desativa a segurança do Chrome
     supportFile: 'cypress/support/e2e.ts', // Arquivo de suporte
   },
+  env: {
+    "email": "teste2021@teste.com.br",
+    "password": "teste"
+  },
+
 });
+

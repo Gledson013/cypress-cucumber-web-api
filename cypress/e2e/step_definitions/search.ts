@@ -1,17 +1,17 @@
-import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
+import { Given, When, Then } from "@badeball/cypress-cucumber-preprocessor";
 
-Given('I am on the homepage', () => {
-    cy.visit('http://automationpractice.com/index.php');
-    cy.screenshot('step-homepage');
+Given("I am on the homepage", () => {    
+    cy.login(); 
 });
 
-When('I search for {string}', (searchTerm: string) => {
-    cy.get('#search_query_top').type(searchTerm);
-    cy.get('button[name="submit_search"]').click();
-    cy.screenshot('step-search-results');
+When("I access the products screen", () => {
+    cy.accessProductsPage();
 });
 
-Then('I should see results related to {string}', (searchTerm: string) => {
-    cy.contains(searchTerm).should('be.visible');
-    cy.screenshot('step-search-validated');
+When("I search for {string}", (product: string) => {
+    cy.searchProduct(product);
+});
+
+Then("I should see results related to {string}", (product: string) => {
+    cy.verifySearchResults(product);
 });
