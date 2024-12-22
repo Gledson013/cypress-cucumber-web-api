@@ -1,15 +1,10 @@
-import { Before, After } from '@badeball/cypress-cucumber-preprocessor';
+// cypress/support/e2e.ts
 
-Before(() => {
-    cy.log('Iniciando um novo cenário...');
-    cy.screenshot('before-scenario'); // Captura de tela antes de cada cenário (opcional)
+// Importa comandos personalizados
+import './commands';
+
+// Você pode incluir capturas de tela globais aqui, mas evite steps ou hooks
+Cypress.on('uncaught:exception', (err) => {
+    console.error('Erro não tratado:', err);
+    return false;
 });
-
-After(() => {
-    cy.log('Cenário concluído!');
-    cy.screenshot('after-scenario'); // Captura de tela após cada cenário (opcional)
-});
-
-
-// Import commands.js using ES2015 syntax:
-import './commands'

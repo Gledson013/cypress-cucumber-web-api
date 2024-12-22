@@ -20,6 +20,6 @@ module.exports = defineConfig({
       return config;
     },
     specPattern: 'cypress/e2e/features/**/*.feature', // Diretório dos arquivos .feature
-    supportFile: 'cypress/support/e2e.ts', // Arquivo de suporte
+    //supportFile: 'cypress/support/e2e.ts', // Arquivo de suporte
   },
 });
