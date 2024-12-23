@@ -43,7 +43,7 @@ Cypress.Commands.add("login", () => {
     cy.get('[data-qa="login-password"]').type(password);
     cy.get('[data-qa="login-button"]').click();
     cy.contains('Logged in as teste plard').should('be.visible');
-    cy.screenshot({ capture: 'runner' });
+    cy.screenshot('Screenshot Login Sucess', { capture: 'runner' });
 });
 
 Cypress.Commands.add('searchProduct', (product: string) => {
@@ -54,7 +54,32 @@ Cypress.Commands.add('searchProduct', (product: string) => {
 Cypress.Commands.add('accessProductsPage', () => {
     cy.get('a[href="/products"]').click();
     cy.url().should('include', '/products');
+    //cy.screenshot({ capture: 'runner' });
+    cy.screenshot('Screenshot AccessProductsPage', { capture: 'runner' });
 });
+
+Cypress.Commands.add("clearCart", () => {
+    // Acessa o carrinho
+    cy.get('a[href="/view_cart"]').click();
+
+    // Verifica se está na página do carrinho
+    cy.url().should('include', '/view_cart');
+
+    // Remove os produtos do carrinho se existirem
+    cy.get('tbody tr').then((rows) => {
+        if (rows.length > 0) {
+            // Percorre as linhas da tabela e remove cada produto
+            cy.get('.cart_quantity_delete').each(($el) => {
+                cy.wrap($el).click();
+            });
+        }
+    });
+
+    // Valida que o carrinho está vazio
+    cy.contains('Cart is empty!').should('be.visible');
+    cy.screenshot('CartCleared', { capture: 'runner' }); // Captura evidência
+});
+
 
 Cypress.Commands.add('verifySearchResults', (product: string) => {
     cy.get('.productinfo > p').scrollIntoView() // Ajuste o seletor para os nomes dos produtos exibidos
@@ -76,6 +101,9 @@ declare global {
              * @param product Nome do produto para buscar
              */
             searchProduct(product: string): Chainable<void>;
+
+            clearCart(): Chainable<void>;
+
 
             /**
              * Acessa a página de produtos
