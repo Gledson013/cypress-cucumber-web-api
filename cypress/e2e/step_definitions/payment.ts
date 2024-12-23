@@ -9,23 +9,21 @@ Given('I have added products to the cart', () => {
         .first()
         .should('be.visible')
         .and('contain.text', 'Your product has been added to cart.');
-    cy.screenshot('AddProductToCart_ModalVisible', { capture: 'runner' }); // Captura de evidência
 });
 
 When('I proceed to the checkout', () => {
-    cy.get('#cartModal') // Garante que o modal do carrinho está visível
+    cy.get('#cartModal') 
         .should('be.visible')
         .within(() => {
-            cy.get('a[href="/view_cart"]').click(); // Acessa o carrinho
+            cy.get('a[href="/view_cart"]').click(); 
         });
-    cy.get('[class="btn btn-default check_out"]').click(); // Clica no botão de checkout
-    cy.screenshot('ProceedToCheckout', { capture: 'runner' }); // Captura de evidência
+    cy.get('[class="btn btn-default check_out"]').click();
 });
 
 Then('I should see the correct products in the payment screen', () => {
-    cy.get('tr[id="product-13"] .cart_description h4 a').scrollIntoView() // Seletor do nome do produto
-        .should('be.visible') // Garante que o elemento está visível
+    cy.get('tr[id="product-13"] .cart_description h4 a').scrollIntoView()
+        .should('be.visible')
         .and('contain.text', 'Frozen Tops For Kids'); 
-    cy.screenshot('PaymentScreen_Validation', { capture: 'runner' }); // Captura de evidência
+    cy.screenshot('PaymentScreen Success', { capture: 'runner' }); // Captura de evidência
     cy.clearCart(); // Reaproveita o comando para limpar o carrinho
 });

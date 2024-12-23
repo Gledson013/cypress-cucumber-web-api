@@ -15,6 +15,6 @@ When('I click the login button', () => {
 
 Then('I should see {string} on the page', (message: string) => {
     cy.contains(message).should('be.visible');
-    cy.screenshot({capture: 'runner'});
+    cy.screenshot('Login Success', {capture: 'runner'});
 });
 

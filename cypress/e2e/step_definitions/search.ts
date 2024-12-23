@@ -10,8 +10,12 @@ When("I access the products screen", () => {
 
 When("I search for {string}", (product: string) => {
     cy.searchProduct(product);
+    cy.wrap(product).as('searchedProduct'); // Armazena o nome do produto no alias
+
 });
 
 Then("I should see results related to {string}", (product: string) => {
     cy.verifySearchResults(product);
+    cy.screenshot('Search Sucess', { capture: 'runner' });
+
 });
