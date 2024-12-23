@@ -1,19 +1,22 @@
 {
   "compilerOptions": {
-    "target": "ES6", // Define a versão do JavaScript alvo
+    "target": "ES6", // Define as funcionalidades do JavaScript alvo
     "lib": [
       "es6",
       "dom"
-    ], // Adiciona suporte às APIs do ES6 e DOM
+    ], // Suporte ao ES6 e APIs do DOM
     "module": "commonjs", // Define o formato de módulo como CommonJS
-    "strict": true, // Ativa verificações rigorosas de tipos
-    "esModuleInterop": true, // Facilita a importação de módulos CommonJS
-    "skipLibCheck": true, // Ignora a checagem de tipo de arquivos de declaração
+    "strict": true, // Ativa verificações rigorosas de tipo
+    "esModuleInterop": true, // Facilita importações de módulos CommonJS
+    "skipLibCheck": true, // Ignora checagem de tipos em arquivos de declaração
     "forceConsistentCasingInFileNames": true, // Garante consistência em nomes de arquivos
-    "types": ["cypress", "@badeball/cypress-cucumber-preprocessor"] // Adiciona os tipos do Cypress
+    "types": [
+      "cypress",
+      "@badeball/cypress-cucumber-preprocessor"
+    ] // Adiciona os tipos de Cypress e Cucumber
   },
   "include": [
-    "cypress/**/*.ts", // Inclui todos os arquivos TypeScript na pasta cypress
-    "node_modules/@types" // Declarações de tipos adicionais
+    "cypress/**/*.ts", // Inclui arquivos TS na pasta cypress
+    "node_modules/@types" // Adiciona declarações de tipos adicionais
   ]
 }

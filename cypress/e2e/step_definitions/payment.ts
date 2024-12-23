@@ -1,27 +1,28 @@
 import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
+import { locators } from '../../support/locators';
 
 Given('I have added products to the cart', () => {
-    cy.login(); // Reaproveita o comando de login
-    cy.accessProductsPage(); // Reaproveita o comando para acessar a página de produtos
-    cy.searchProduct('Frozen'); // Reaproveita o comando para pesquisar um produto
-    cy.get('[data-product-id="13"]').first().click(); // Adiciona o primeiro produto ao carrinho
-    cy.get('[id="cartModal"] [class="text-center"]') // Verifica o modal do carrinho
+    cy.login(); 
+    cy.accessProductsPage(); 
+    cy.searchProduct('Frozen'); 
+    cy.get(locators.cart.addToCart).first().click(); 
+    cy.get(locators.cart.checkMessage) 
         .first()
         .should('be.visible')
-        .and('contain.text', 'Your product has been added to cart.');
+        .and('contain.text', locators.cart.messageDisplayed);
 });
 
 When('I proceed to the checkout', () => {
-    cy.get('#cartModal') 
+    cy.get(locators.cart.cardModal) 
         .should('be.visible')
         .within(() => {
-            cy.get('a[href="/view_cart"]').click(); 
+            cy.get(locators.cart.viewCart).click(); 
         });
-    cy.get('[class="btn btn-default check_out"]').click();
+    cy.get(locators.cart.proceedToCheckout).click();
 });
 
 Then('I should see the correct products in the payment screen', () => {
-    cy.get('tr[id="product-13"] .cart_description h4 a').scrollIntoView()
+    cy.get(locators.cart.descriptionProduct).scrollIntoView()
         .should('be.visible')
         .and('contain.text', 'Frozen Tops For Kids'); 
     cy.screenshot('PaymentScreen Success', { capture: 'runner' }); // Captura de evidência

@@ -1,4 +1,5 @@
 import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
+import { locators } from '../../support/locators';
 
 Given('I have searched for a product', (product: string) => {
     cy.login(); 
@@ -7,8 +8,8 @@ Given('I have searched for a product', (product: string) => {
 });
 
 When('I add the first product to the cart', () => {
-    cy.get('[data-product-id="13"]').first().click();
-    cy.get('[id="cartModal"] [class="text-center"]') // Seleciona os elementos dentro do modal com a classe "text-center"
+    cy.get(locators.cart.addToCart).first().click();
+    cy.get(locators.cart.checkMessage) // Seleciona os elementos dentro do modal com a classe "text-center"
         .first() // Garante que pega o primeiro elemento
         .should('be.visible')
         .and('contain.text', 'Your product has been added to cart.'); // Valida o texto
@@ -16,12 +17,12 @@ When('I add the first product to the cart', () => {
 
 Then('I should see the product in the cart summary', () => {
     
-    cy.get('#cartModal').should('be.visible').within(() => {
-        cy.get('a[href="/view_cart"]').click();
+    cy.get(locators.cart.cardModal).should('be.visible').within(() => {
+        cy.get(locators.cart.viewCart).click();
     });
 
     cy.getSearchedProduct().then((product) => {
-        cy.get('tr#product-13 .cart_description h4 a')
+        cy.get(locators.cart.descriptionProduct)
             .should('contain.text', product); // Valida que o produto correto está no carrinho
     });
 
