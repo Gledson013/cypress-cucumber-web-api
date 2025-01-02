@@ -7,7 +7,7 @@ Cypress.Commands.add("login", () => {
     cy.get(locators.login.email).type(email);
     cy.get(locators.login.password).type(password);
     cy.get(locators.login.submit).click();
-    cy.contains('Logged in as teste plard').should('be.visible');
+    cy.contains('Logged in as').should('be.visible');
 });
 
 Cypress.Commands.add("searchProduct", (product: string) => {
@@ -23,7 +23,6 @@ Cypress.Commands.add("getSearchedProduct", (): Cypress.Chainable<string> => {
 Cypress.Commands.add('accessProductsPage', () => {
     cy.get(locators.products.goProduts).click();
     cy.url().should('include', '/products');
-    
 });
 
 

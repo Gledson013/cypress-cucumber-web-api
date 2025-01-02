@@ -50,7 +50,7 @@ module.exports = defineConfig({
   },
   env: {
     "email": "teste2021@teste.com.br",
-    "password": "teste",
+    "password": "teste123",
     "trelloApiUrl": "https://api.trello.com/1/actions/592f11060f95a3d3d46a987a", // URL da API do Trello
     "loginUrl": "https://www.automationexercise.com/login",
   },
